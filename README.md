@@ -1,2 +1,2 @@
-# azure-audit-dashboard
-An Azure Dashboard for optimizing cost and security benefits based on Kusto queries.
+# azure-audit-workbooks
+Azure workbooks for optimizing cost and security benefits based on Kusto queries.
