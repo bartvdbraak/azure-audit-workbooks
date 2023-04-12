@@ -1,4 +1,4 @@
-name: Deploy Bicep to Azure
+name: Build and Deploy to Azure
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
       - .github/workflows/azure-deploy.yaml
       - bicep/**/*.bicep
       - bicep/main.params.json
+      - workbooks/example.json
 
 jobs:
   build-workbook-data:
@@ -13,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       WORKBOOK_PATH: workbooks/example.json
+    outputs:
+      serializedWorkbookData: ${{ steps.serialize.outputs.serializedWorkbookData }}
     steps:
     - uses: actions/checkout@v3
 
@@ -20,7 +23,11 @@ jobs:
       with:
         python-version: '3.10' 
 
-    - run: python -c "import json; print(json.dumps(json.load(open('$WORKBOOK_PATH'))))" >> "$GITHUB_OUTPUT"
+    - name: Serialize Workbook data
+      id: serialize
+      run: |
+        serializedWorkbookData=$(python -c "import json; print(json.dumps(json.load(open('$WORKBOOK_PATH'))))") 
+        echo "serializedWorkbookData=$serializedWorkbookData" >> "$GITHUB_OUTPUT"
 
   deploy-azure-resources:
     needs: build-workbook-data
@@ -29,6 +36,7 @@ jobs:
     env:
       LOCATION: eastus
       DEPLOYMENT_NAME: cluster-github-production-workflow-${{ github.run_id }}
+      WORKBOOK_DATA: ${{needs.build-workbook-data.outputs.serializedWorkbookData}}
     steps:
     - uses: actions/checkout@v3
 
@@ -42,7 +50,7 @@ jobs:
         scope: subscription
         region: ${{ env.LOCATION }}
         template: bicep/main.bicep
-        parameters: bicep/main.params.json
+        parameters: bicep/main.params.json workbookData=$WORKBOOK_DATA
         deploymentName: ${{ env.DEPLOYMENT_NAME }}
         additionalArguments: "--what-if"
 
@@ -53,5 +61,5 @@ jobs:
         scope: subscription
         region: ${{ env.LOCATION }}
         template: bicep/main.bicep
-        parameters: bicep/main.params.json
+        parameters: bicep/main.params.json workbookData=$WORKBOOK_DATA
         deploymentName: ${{ env.DEPLOYMENT_NAME }}
