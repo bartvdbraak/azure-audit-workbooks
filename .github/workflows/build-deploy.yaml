@@ -3,7 +3,7 @@ name: Build and Deploy to Azure
 on:
   push:
     paths:
-      - .github/workflows/azure-deploy.yaml
+      - .github/workflows/build-deploy.yaml
       - bicep/**/*.bicep
       - bicep/main.params.json
       - workbooks/example.json
