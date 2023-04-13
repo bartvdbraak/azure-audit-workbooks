@@ -1,12 +1,14 @@
 <h1 align="center">
     <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/3996360/231610699-a18b16c0-99d5-465c-a58c-90b97409f3fb.svg">
-        <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/3996360/231610697-3f40ae17-918c-46d4-9be5-6f7d1b61b7e1.svg">
-        <img src="https://user-images.githubusercontent.com/3996360/231610699-a18b16c0-99d5-465c-a58c-90b97409f3fb.svg" alt="Cluster" width="336">
+        <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/3996360/231779606-e809ac76-6062-4003-81c6-c943850e5554.svg">
+        <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/3996360/231779609-94fa2286-8687-4ea2-ac10-be0d9059b303.svg">
+        <img src="https://user-images.githubusercontent.com/3996360/231779606-e809ac76-6062-4003-81c6-c943850e5554.svg" alt="Azure Audit Workbooks" width="336">
     </picture>
 </h1>
 
-[![Build and Deploy to Azure](https://github.com/bartvdbraak/azure-audit-workbooks/actions/workflows/build-deploy.yaml/badge.svg)](https://github.com/bartvdbraak/azure-audit-workbooks/actions/workflows/build-deploy.yaml)
+<p align="center">
+  <a href="https://github.com/bartvdbraak/azure-audit-workbooks/actions/workflows/build-deploy.yaml"><img src="https://github.com/bartvdbraak/azure-audit-workbooks/actions/workflows/build-deploy.yaml/badge.svg" alt="Build and Deploy to Azure" style="max-width: 100%;"></a>
+</p>
 
 ## Usage
 
