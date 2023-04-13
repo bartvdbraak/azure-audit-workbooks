@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-workbook-data:
-    name: Deploy Azure resources
+    name: Build Workbook data
     runs-on: ubuntu-latest
     env:
       WORKBOOK_PATH: workbooks/example.json
