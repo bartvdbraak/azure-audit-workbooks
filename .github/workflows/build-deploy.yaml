@@ -27,7 +27,7 @@ jobs:
       id: serialize
       run: |
         serializedWorkbookData=$(python -c "import json; print(json.dumps(json.load(open('$WORKBOOK_PATH'))))") 
-        echo "serializedWorkbookData=$serializedWorkbookData" >> "$GITHUB_OUTPUT"
+        echo "serializedWorkbookData=${serializedWorkbookData@Q}" >> "$GITHUB_OUTPUT"
 
   deploy-azure-resources:
     needs: build-workbook-data
