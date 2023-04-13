@@ -27,7 +27,7 @@ jobs:
       id: serialize
       run: |
         serializedWorkbookData=$(python -c "import json; print(json.dumps(json.load(open('$WORKBOOK_PATH'))))") 
-        echo "serializedWorkbookData=$serializedWorkbookData" >> "$GITHUB_OUTPUT"
+        echo "serializedWorkbookData=${serializedWorkbookData@Q}" >> "$GITHUB_OUTPUT"
 
   deploy-azure-resources:
     needs: build-workbook-data
@@ -44,13 +44,20 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+    - name: Update parameter file
+      uses: jossef/action-set-json-field@v2.1
+      with:
+        file: bicep/main.params.json
+        field: parameters.workbookData.value
+        value: ${{ env.WORKBOOK_DATA }}
+
     - name: Validate Bicep template
       uses: azure/arm-deploy@v1
       with:
         scope: subscription
         region: ${{ env.LOCATION }}
         template: bicep/main.bicep
-        parameters: bicep/main.params.json workbookData=${{ env.WORKBOOK_DATA }}
+        parameters: bicep/main.params.json
         deploymentName: ${{ env.DEPLOYMENT_NAME }}
         additionalArguments: "--what-if"
 
@@ -61,5 +68,5 @@ jobs:
         scope: subscription
         region: ${{ env.LOCATION }}
         template: bicep/main.bicep
-        parameters: bicep/main.params.json workbookData=${{ env.WORKBOOK_DATA }}
+        parameters: bicep/main.params.json
         deploymentName: ${{ env.DEPLOYMENT_NAME }}
