@@ -46,8 +46,6 @@ graph TD;
     subgraph "Job: deploy-azure-resources"
     C
     end
-
-    style A,B,C,D fill:#F8F8F8;
 ```
 
 In addition, we have implemented `dependabot` to suggest updating new versions of our Github Actions, ensuring that we always have the latest and most secure versions of our dependencies.
