@@ -33,22 +33,19 @@ This workflow automates the deployment process for our Azure infrastructure. The
 
 ```mermaid
 graph TD;
-    A[Bicep, Workflow, or Workbook modified?] -->|Yes| B[Checkout code];
-    B --> C[Login to Azure];
-    C --> D[Validate Bicep template];
-    D --> E[Deploy Bicep template];
-    F[End];
+    A[Changes detected in Bicep/Workbook?] -->|Yes| B[Serialize Workbook data];
+    B --> C[Deploy Azure resources];
+    C --> D[End];
 
-    subgraph "Trigger"
-    B & A
+    subgraph "Job: build-workbook-data"
+    B
     end
 
-    subgraph "Push occurred on 'main'"
-    E --> F
+    subgraph "Job: deploy-azure-resources"
+    C
     end
 
-    style A fill:#F8F8F8;
-    style F fill:#F8F8F8;
+    style A,B,C,D fill:#F8F8F8;
 ```
 
 In addition, we have implemented `dependabot` to suggest updating new versions of our Github Actions, ensuring that we always have the latest and most secure versions of our dependencies.
