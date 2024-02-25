@@ -11,6 +11,8 @@
 </p>
 
 ## Usage
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fbartvdbraak%2Fazure-audit-workbooks.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fbartvdbraak%2Fazure-audit-workbooks?ref=badge_shield)
+
 
 ### Deploying the Workbook(s)
 
@@ -53,3 +55,6 @@ In addition, we have implemented `dependabot` to suggest updating new versions o
 ## License
 
 This project is licensed under the terms of the MIT license. See the [LICENSE](./LICENSE) file for details.
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fbartvdbraak%2Fazure-audit-workbooks.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fbartvdbraak%2Fazure-audit-workbooks?ref=badge_large)
